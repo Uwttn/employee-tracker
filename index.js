@@ -1,3 +1,4 @@
+// This is to prompt the initial questions
 const inquirer = require("inquirer");
 
 inquirer
