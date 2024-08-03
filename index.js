@@ -1,82 +1,100 @@
-// This is to prompt the initial questions
-const { prompt } = require('inquirer');
+const inquirer = require('inquirer');
 const db = require('./db');
 
-main()
-
-function main() {
-    prompt([
-        {
-            type: "list",
-            name: "choice",
-            message: "Choose from the options below.",
-            choices: [
-                {
-                    name: "view all departments",
-                    value: "VIEW_ALL_DEPARTMENTS",
-                },
-                {
-                    name: "view all roles",
-                    value: "VIEW_ALL_ROLES",
-                },
-                {
-                    name: "view all employees",
-                    value: "VIEW_ALL_EMPLOYEES",
-                },
-                // "view all employees", "add a department", "add a role", "add an employee", "update an employee role"
-            ],
-        },
-    ])
-
-        .then((res) => {
-            let choice = res.choice;
-            switch (choice) {
-                case "VIEW_ALL_DEPARTMENTS":
-                    viewAllDepartments();
-                    break;
-                case "VIEW_ALL_ROLES":
-                    viewAllRoles();
-                    break;
-                    case "VIEW_ALL_EMPLOYEES":
-                    viewAllEmployees();
-                    break;
-                default:
-                    quit();
+async function main() {
+    try {
+        const res = await inquirer.prompt([
+            {
+                type: "list",
+                message: "Choose from the options below.",
+                choices: ["view all departments", "view all roles", "view all employees", "add a department", "add a role", "add an employee", "update an employee role", "quit"],
+                name: "options",
             }
-        });
+        ]);
+
+        const options = res.options;
+
+        switch (options) {
+
+            case 'view all departments':
+                const departments = await db.findAllDepartments();
+                console.table(departments.rows);
+                break;
+
+            case 'view all roles':
+                const roles = await db.findAllRoles();
+                console.table(roles.rows);
+                break;
+
+            case 'view all employees':
+                const employees = await db.findAllEmployees();
+                console.table(employees.rows);
+                break;
+
+            case 'add a department':
+                await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'department',
+                        message: 'enter the department name:',
+                    },
+                ])
+                .then((department) => {
+                    db.addDepartment(department)
+                    console.log(`${department.department} was added to the database`)
+                })
+                break;
+
+            case 'add a role':
+                await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'title',
+                        message: 'enter the new role'
+                    },
+                    {
+                        type: 'input',
+                        name: 'salary',
+                        message: 'enter the salary'
+                    },
+                    {
+                        type: 'list',
+                        name: 'department_id',
+                        message: 'enter department id',
+                        choices: [101, 102, 103, 104, 105, 106, 107],
+                    },
+                ])
+                    .then((role) => {
+                        db.addRole(role)
+                        console.log(`${role.title} was added to the database`)
+                    })
+                break;
+                
+            case 'add an employee':
+                    await inquirer.prompt ([
+                        {
+                        type: 'input',
+                        name: 'first_name',
+                        message: 'enter first name:'
+                        },
+                        {
+                        type: 'input',
+                        name: 'last_name',
+                        message: 'enter last name',
+                        },
+                        {
+                        type: 'list',
+                        name: 'department_id',
+                        message: 'enter department id',
+                        choices: [101, 102, 103, 104, 105, 106, 107],
+                        },
+                    ])
+                default:
+                console.log('Invalid option');
+        }
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
 }
 
-function viewAllDepartments() {
-    db.findAllDepartments()
-        .then(({ rows }) => {
-            let department = rows;
-            console.log("\n");
-            console.table(department);
-        })
-        .then(() => main());
-}
-
-function viewAllRoles() {
-    db.findAllRoles()
-        .then(({ rows }) => {
-            let role = rows;
-            console.log("\n");
-            console.table(role);
-        })
-        .then(() => main());
-}
-
-function viewAllEmployees() {
-    db.findAllEmployees()
-        .then(({ rows }) => {
-            let role = rows;
-            console.log("\n");
-            console.table(role);
-        })
-        .then(() => main());
-}
-
-function quit() {
-    console.log("Bye bye");
-    process.exit();
-}
+main();

@@ -1,3 +1,5 @@
+\c employee_tracker_db;
+
 INSERT INTO department (id, name)
     VALUES 
         (101, 'Utilities'),
