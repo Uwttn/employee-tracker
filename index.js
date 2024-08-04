@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const db = require('./db');
+const db = require('./db/index');
 
 async function main() {
     try {
@@ -35,15 +35,15 @@ async function main() {
                 await inquirer.prompt([
                     {
                         type: 'input',
-                        name: 'department',
-                        message: 'enter the department name:',
+                        name: 'name',
+                        message: 'enter the department name',
                     },
                 ])
                 .then((department) => {
                     db.addDepartment(department)
-                    console.log(`${department.department} was added to the database`)
+                    console.log(`${department.name} was added to the database`)
                 })
-                break;
+            break;
 
             case 'add a role':
                 await inquirer.prompt([
@@ -70,25 +70,27 @@ async function main() {
                     })
                 break;
                 
-            case 'add an employee':
-                    await inquirer.prompt ([
-                        {
-                        type: 'input',
-                        name: 'first_name',
-                        message: 'enter first name:'
-                        },
-                        {
-                        type: 'input',
-                        name: 'last_name',
-                        message: 'enter last name',
-                        },
-                        {
-                        type: 'list',
-                        name: 'department_id',
-                        message: 'enter department id',
-                        choices: [101, 102, 103, 104, 105, 106, 107],
-                        },
-                    ])
+            // case 'add an employee':
+            //         await inquirer.prompt ([
+            //             {
+            //             type: 'input',
+            //             name: 'first_name',
+            //             message: 'enter first name:'
+            //             },
+            //             {
+            //             type: 'input',
+            //             name: 'last_name',
+            //             message: 'enter last name',
+            //             },
+            //             {
+            //             type: 'list',
+            //             name: 'department_id',
+            //             message: 'enter department id',
+            //             choices: [101, 102, 103, 104, 105, 106, 107],
+            //             },
+            //         ])
+
+
                 default:
                 console.log('Invalid option');
         }

@@ -1,7 +1,7 @@
 const pool = require('./connection');
 
 class DB {
-  constructor() { }
+  constructor() {}
 
   async query(sql, args = []) {
     const client = await pool.connect();
@@ -23,8 +23,8 @@ class DB {
     return this.query('SELECT * FROM employee;');
   }
   addDepartment(department) {
-    return this.query('INSERT INTO department (name) VALUES ($1)', [
-      department.name
+    return this.query('INSERT INTO department (name) VALUES ($1);', [
+      JSON.stringify(department.name)
     ]);
   }
   addRole(roleName) {
