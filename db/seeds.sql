@@ -2,23 +2,23 @@
 
 INSERT INTO department (id, name)
     VALUES 
-        (1, 'Utilities'),
-        (2, 'Administration'),
-        (3, 'Management'),
-        (4, 'Human Resources'),
-        (5, 'Engineering'),
-        (6, 'Information Technology'),
-        (7, 'Special services');
+        (101, 'Utilities'),
+        (202, 'Administration'),
+        (303, 'Management'),
+        (404, 'Human Resources'),
+        (505, 'Engineering'),
+        (606, 'Information Technology'),
+        (707, 'Special services');
 
 INSERT INTO role (title, salary, department_id)
     VALUES
-        ('Operations Coordinator', 70000, 1),
-        ('Project Manager', 90000, 2),
-        ('Counselor', 40000, 3),
-        ('GIS Technician', 80000, 4),
-        ('Cleaner', 30000, 5),
-        ('Chief Executive Office', 100000, 6),
-        ('Chief Financial Officer', 120000, 7);
+        ('Operations Coordinator', 70000, 101),
+        ('Project Manager', 90000, 202),
+        ('Counselor', 40000, 303),
+        ('GIS Technician', 80000, 404),
+        ('Cleaner', 30000, 505),
+        ('Chief Executive Office', 100000, 606),
+        ('Chief Financial Officer', 120000, 707);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
     VALUES
