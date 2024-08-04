@@ -97,6 +97,10 @@ async function main() {
                         db.addEmployee(employeeName)
                         console.log(`${employeeName.last_name, employeeName.first_name} was added.`)
                     })
+                    
+                    
+                // case 'update an employee role':
+                    
         }
     } catch (error) {
         console.error('An error occurred:', error);

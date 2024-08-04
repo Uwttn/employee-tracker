@@ -37,6 +37,12 @@ class DB {
       [first_name, last_name, role_id, manager_id]
     );
   }
+  updateEmployeeRole(employeeId, roleId) {
+    return this.query('UPDATE employee SET role_id = $1 WHERE id = $2', [
+      roleId,
+      employeeId,
+    ]);
+  }
 }
 
 module.exports = new DB();
