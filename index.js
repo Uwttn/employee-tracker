@@ -39,60 +39,64 @@ async function main() {
                         message: 'enter the department name',
                     },
                 ])
-                .then((department) => {
-                    db.addDepartment(department)
-                    console.log(`${department.name} was added to the database`)
-                })
-            break;
+                    .then((department) => {
+                        db.addDepartment(department)
+                        console.log(`${department.name} was added to the database`)
+                    })
+                break;
 
-            case 'add a role':
-                await inquirer.prompt([
-                    {
-                        type: 'input',
-                        name: 'title',
-                        message: 'enter the new role'
-                    },
-                    {
-                        type: 'input',
-                        name: 'salary',
-                        message: 'enter the salary'
-                    },
-                    {
-                        type: 'list',
-                        name: 'department_id',
-                        message: 'enter department id',
-                        choices: [101, 102, 103, 104, 105, 106, 107],
-                    },
-                ])
+                case 'add a role':
+                    
+                    await inquirer.prompt([
+                        {
+                            type: 'input',
+                            name: 'title',
+                            message: 'enter the new role'
+                        },
+                        {
+                            type: 'input',
+                            name: 'salary',
+                            message: 'enter the salary'
+                        },
+                        {
+                            type: 'input',
+                            name: 'department_id',
+                            message: 'enter id of the department',
+                        },
+                    ])
                     .then((role) => {
                         db.addRole(role)
                         console.log(`${role.title} was added to the database`)
                     })
-                break;
-                
-            // case 'add an employee':
-            //         await inquirer.prompt ([
-            //             {
-            //             type: 'input',
-            //             name: 'first_name',
-            //             message: 'enter first name:'
-            //             },
-            //             {
-            //             type: 'input',
-            //             name: 'last_name',
-            //             message: 'enter last name',
-            //             },
-            //             {
-            //             type: 'list',
-            //             name: 'department_id',
-            //             message: 'enter department id',
-            //             choices: [101, 102, 103, 104, 105, 106, 107],
-            //             },
-            //         ])
-
-
-                default:
-                console.log('Invalid option');
+                    break;
+                    
+            case 'add an employee':
+                await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'first_name',
+                        message: 'enter first name:'
+                    },
+                    {
+                        type: 'input',
+                        name: 'last_name',
+                        message: 'enter last name',
+                    },
+                    {
+                        type: 'input',
+                        name: 'role_id',
+                        message: 'enter role id',
+                    },
+                    {
+                        type: 'input',
+                        name: 'manager_id',
+                        message: 'enter manager id',
+                    },
+                ])
+                    .then((employeeName) => {
+                        db.addEmployee(employeeName)
+                        console.log(`${employeeName.last_name, employeeName.first_name} was added.`)
+                    })
         }
     } catch (error) {
         console.error('An error occurred:', error);
