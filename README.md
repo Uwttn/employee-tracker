@@ -47,6 +47,9 @@
 2. Navigate to the directory where the application is located (index.js).
 3. Run the application using its command (node `filepath`)
 
+# Usage
+[Usage guide](https://www.youtube.com/watch?v=-zgpXxu2_5c&list=PLk8XMm2RW3E87aiavU5ivWAPg0ldUqFru&index=1)
+
 # Languages
 JavaScript & SQL
 
