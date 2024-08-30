@@ -5,7 +5,7 @@
 </div>
 
 # employee-tracker
-
+![alt text](employees.png)
 ## Description
   A questionaire that allows to create a README
 
